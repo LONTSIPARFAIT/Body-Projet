@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="title">BodyMac Labs - Nos Réalisations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #1E3A8A;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .dark-mode nav {
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .dark-mode nav h1 {
+            color: #e2e8f0;
+        }
+
+        nav h1:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav ul li a, nav ul li button {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .dark-mode nav ul li a, .dark-mode nav ul li button {
+            color: #e2e8f0;
+        }
+
+        nav ul li a:hover, nav ul li button:hover {
+            color: #a3bffa;
+        }
+
+        .dark-mode nav ul li a:hover, .dark-mode nav ul li button:hover {
+            color: #ffffff;
+        }
+
+        nav ul li a::after, nav ul li button::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #a3bffa;
+            transition: width 0.3s ease;
+        }
+
+        .dark-mode nav ul li a::after, .dark-mode nav ul li button::after {
+            background-color: #ffffff;
+        }
+
+        nav ul li a:hover::after, nav ul li button:hover::after {
+            width: 100%;
+        }
+
+        /* Language Select */
+        #language-select {
+            background-color: #1E3A8A;
+            color: #ffffff;
+            border: 1px solid #a3bffa;
+            padding: 0.3rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            min-width: 60px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode #language-select {
+            background-color: #2a2a2a;
+            color: #e2e8f0;
+            border-color: #ffffff;
+        }
+
+        #language-select:hover {
+            background-color: #2b4eb8;
+        }
+
+        .dark-mode #language-select:hover {
+            background-color: #333333;
+        }
+
+        /* Burger Menu */
+        .burger {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+        }
+
+        .burger svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 2;
+            transition: all 0.4s ease;
+        }
+
+        .dark-mode .burger svg {
+            stroke: #e2e8f0;
+        }
+
+        .burger.active .line1 {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .burger.active .line2 {
+            opacity: 0;
+        }
+
+        .burger.active .line3 {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Intro Section */
+        .intro {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(to right, #1E3A8A, #000000);
+            color: #ffffff;
+        }
+
+        .intro .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .intro h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .portfolio .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1E3A8A;
+        }
+
+        .dark-mode .portfolio h3 {
+            color: #a3bffa;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .dark-mode .portfolio-card {
+            background-color: #333333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode .portfolio-card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .portfolio-card img {
+            border-color: #555;
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1E3A8A;
+        }
+
+        .dark-mode .portfolio-card h4 {
+            color: #a3bffa;
+        }
+
+        .portfolio-card p {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .dark-mode .portfolio-card p {
+            color: #cccccc;
+        }
+
+        .portfolio-card a {
+            display: inline-block;
+            background-color: #1E3A8A;
+            color: #ffffff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .dark-mode .portfolio-card a {
+            background-color: #2b4eb8;
+        }
+
+        .portfolio-card a:hover {
+            background-color: #2b4eb8;
+            transform: scale(1.05);
+        }
+
+        .dark-mode .portfolio-card a:hover {
+            background-color: #3b6ad6;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+
+        .dark-mode .testimonials {
+            background-color: #2a2a2a;
+        }
+
+        .testimonials .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonials h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1E3A8A;
+            grid-column: 1 / -1;
+        }
+
+        .dark-mode .testimonials h3 {
+            color: #a3bffa;
+        }
+
+        .testimonial-item {
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .dark-mode .testimonial-item {
+            background-color: #333333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonial-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        .testimonial-item h4 {
+            font-size: 1.2rem;
+            color: #1E3A8A;
+            margin-bottom: 0.5rem;
+        }
+
+        .dark-mode .testimonial-item h4 {
+            color: #a3bffa;
+        }
+
+        .testimonial-item p {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .dark-mode .testimonial-item p {
+            color: #cccccc;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: #a3bffa;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem;
+            }
+
+            nav .container {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-right {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 0.5rem;
+                justify-content: flex-end;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            #language-select {
+                font-size: 0.8rem;
+                padding: 0.2rem;
+                min-width: 50px;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #1E3A8A;
+                padding: 0.5rem;
+                gap: 1rem;
+                transition: transform 0.3s;
+                transform: translateY(-100%);
+            }
+
+            nav ul.active {
+                display: flex;
+                transform: translateY(0);
+            }
+
+            nav ul li a, nav ul li button {
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .intro h2, .portfolio h3, .testimonials h3 {
+                font-size: 2rem;
+            }
+
+            .intro p, .portfolio-card p, .testimonial-item p {
+                font-size: 1rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-card img {
+                height: 150px;
+            }
+
+            .testimonials .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <h1 data-translate="logo">BodyMac Labs</h1>
+            <div class="nav-right">
+                <select id="language-select">
+                    <option value="fr">FR</option>
+                    <option value="en">US</option>
+                </select>
+                <div class="burger" id="burger">
+                    <svg viewBox="0 0 30 20">
+                        <line class="line1" x1="0" y1="2" x2="30" y2="2"/>
+                        <line class="line2" x1="0" y1="10" x2="30" y2="10"/>
+                        <line class="line3" x1="0" y1="18" x2="30" y2="18"/>
+                    </svg>
+                </div>
+                <ul id="nav-menu">
+                    <li><a href="index.html" data-translate="nav-home">Accueil</a></li>
+                    <li><a href="about.html" data-translate="nav-about">À propos</a></li>
+                    <li><a href="services.html" data-translate="nav-services">Services</a></li>
+                    <li><a href="realisation.html" data-translate="nav-achievements">Nos Réalisations</a></li>
+                    <li><a href="contact.html" data-translate="nav-contact">Contact</a></li>
+                    <li><button id="theme-toggle" data-translate="theme-toggle">🌙 Mode Sombre</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Intro Section -->
+    <section class="intro">
+        <div class="container fade-in">
+            <h2 data-translate="intro-title">Nos Réalisations</h2>
+            <p data-translate="intro-text">
+                Découvrez les projets innovants que BodyMac Labs a réalisés pour transformer des idées en solutions concrètes. Chaque réalisation reflète notre engagement envers l'excellence technologique.
+            </p>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio">
+        <div class="container">
+            <h3 data-translate="portfolio-title">Nos Projets</h3>
+            <div class="portfolio-grid">
+                <div class="portfolio-card fade-in">
+                    <img src="./img/nguengan.png" alt="NgueNganRésultat">
+                    <h4 data-translate="portfolio-1-title">NgueNganRésultat</h4>
+                    <p data-translate="portfolio-1-text">
+                        Plateforme de gestion des résultats en ligne pour les étudiants et les enseignants, facilitant l'accès aux résultats académiques et la communication entre les parties prenantes.
+                    </p>
+                    <a href="https://devfack.com/" target="_blank" data-translate="portfolio-1-btn">En savoir plus</a>
+                </div>
+                <div class="portfolio-card fade-in">
+                    <img src="./img/studenapp.png" alt="StudentAPP">
+                    <h4 data-translate="portfolio-2-title">StudentAPP</h4>
+                    <p data-translate="portfolio-2-text">
+                        Plateforme de gestion des relevés de notes en ligne pour les étudiants et les enseignants, facilitant l'accès aux résultats académiques et la communication entre les parties prenantes.
+                    </p>
+                    <a href="https://studentapp.devfack.com/" target="_blank" data-translate="portfolio-2-btn">En savoir plus</a>
+                </div>
+                <div class="portfolio-card fade-in">
+                    <img src="./img/preinsc.png" alt="E-PreInsc">
+                    <h4 data-translate="portfolio-3-title">E-PreInsc</h4>
+                    <p data-translate="portfolio-3-text">
+                        Plateforme de préinscription en ligne pour les étudiants, simplifiant le processus d'inscription et améliorant l'expérience utilisateur.
+                    </p>
+                    <a href="https://e-apprenant-cfpc.devfack.com/" target="_blank" data-translate="portfolio-3-btn">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h3 data-translate="testimonials-title">Ce que disent nos clients</h3>
+            <div class="testimonial-item fade-in">
+                <img src="https://via.placeholder.com/80?text=Tamba" alt="TAMBA Andre Daniel">
+                <h4 data-translate="testimonial-1-name">TAMBA Andre Daniel</h4>
+                <p data-translate="testimonial-1-text">
+                    "BodyMac Labs a transformé notre approche de la gestion des données avec une solution sur mesure qui dépasse nos attentes."
+                </p>
+            </div>
+            <div class="testimonial-item fade-in">
+                <img src="https://via.placeholder.com/80?text=Lontsi" alt="LONTSI Parfait">
+                <h4 data-translate="testimonial-2-name">LONTSI Parfait</h4>
+                <p data-translate="testimonial-2-text">
+                    "Leur expertise en développement nous a permis de lancer un produit innovant en un temps record. Une équipe exceptionnelle !"
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p data-translate="footer-copyright">© 2025 BodyMac Labs. Tous droits réservés.</p>
+            <p>
+                <a href="contact.html" data-translate="footer-contact">Contactez-nous</a> | 
+                <a href="services.html" data-translate="footer-services">Nos services</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Traductions
+        const translations = {
+            fr: {
+                'title': 'BodyMac Labs - Nos Réalisations',
+                'logo': 'BodyMac Labs',
+                'nav-home': 'Accueil',
+                'nav-about': 'À propos',
+                'nav-services': 'Services',
+                'nav-achievements': 'Nos Réalisations',
+                'nav-contact': 'Contact',
+                'theme-toggle': '🌙 Mode Sombre',
+                'theme-toggle-dark': '☀️ Mode Clair',
+                'intro-title': 'Nos Réalisations',
+                'intro-text': 'Découvrez les projets innovants que BodyMac Labs a réalisés pour transformer des idées en solutions concrètes. Chaque réalisation reflète notre engagement envers l\'excellence technologique.',
+                'portfolio-title': 'Nos Projets',
+                'portfolio-1-title': 'NgueNganRésultat',
+                'portfolio-1-text': 'Plateforme de gestion des résultats en ligne pour les étudiants et les enseignants, facilitant l\'accès aux résultats académiques et la communication entre les parties prenantes.',
+                'portfolio-1-btn': 'En savoir plus',
+                'portfolio-2-title': 'StudentAPP',
+                'portfolio-2-text': 'Plateforme de gestion des relevés de notes en ligne pour les étudiants et les enseignants, facilitant l\'accès aux résultats académiques et la communication entre les parties prenantes.',
+                'portfolio-2-btn': 'En savoir plus',
+                'portfolio-3-title': 'E-PreInsc',
+                'portfolio-3-text': 'Plateforme de préinscription en ligne pour les étudiants, simplifiant le processus d\'inscription et améliorant l\'expérience utilisateur.',
+                'portfolio-3-btn': 'En savoir plus',
+                'testimonials-title': 'Ce que disent nos clients',
+                'testimonial-1-name': 'TAMBA Andre Daniel',
+                'testimonial-1-text': 'BodyMac Labs a transformé notre approche de la gestion des données avec une solution sur mesure qui dépasse nos attentes.',
+                'testimonial-2-name': 'LONTSI Parfait',
+                'testimonial-2-text': 'Leur expertise en développement nous a permis de lancer un produit innovant en un temps record. Une équipe exceptionnelle !',
+                'footer-copyright': '© 2025 BodyMac Labs. Tous droits réservés.',
+                'footer-contact': 'Contactez-nous',
+                'footer-services': 'Nos services'
+            },
+            en: {
+                'title': 'BodyMac Labs - Our Achievements',
+                'logo': 'BodyMac Labs',
+                'nav-home': 'Home',
+                'nav-about': 'About',
+                'nav-services': 'Services',
+                'nav-achievements': 'Our Achievements',
+                'nav-contact': 'Contact',
+                'theme-toggle': '🌙 Dark Mode',
+                'theme-toggle-dark': '☀️ Light Mode',
+                'intro-title': 'Our Achievements',
+                'intro-text': 'Discover the innovative projects that BodyMac Labs has delivered to turn ideas into concrete solutions. Each achievement reflects our commitment to technological excellence.',
+                'portfolio-title': 'Our Projects',
+                'portfolio-1-title': 'NgueNganRésultat',
+                'portfolio-1-text': 'Online results management platform for students and teachers, facilitating access to academic results and communication between stakeholders.',
+                'portfolio-1-btn': 'Learn More',
+                'portfolio-2-title': 'StudentAPP',
+                'portfolio-2-text': 'Online grade management platform for students and teachers, facilitating access to academic results and communication between stakeholders.',
+                'portfolio-2-btn': 'Learn More',
+                'portfolio-3-title': 'E-PreInsc',
+                'portfolio-3-text': 'Online pre-registration platform for students, simplifying the enrollment process and enhancing user experience.',
+                'portfolio-3-btn': 'Learn More',
+                'testimonials-title': 'What Our Clients Say',
+                'testimonial-1-name': 'TAMBA Andre Daniel',
+                'testimonial-1-text': 'BodyMac Labs transformed our data management approach with a custom solution that exceeds our expectations.',
+                'testimonial-2-name': 'LONTSI Parfait',
+                'testimonial-2-text': 'Their expertise in development allowed us to launch an innovative product in record time. An exceptional team!',
+                'footer-copyright': '© 2025 BodyMac Labs. All rights reserved.',
+                'footer-contact': 'Contact Us',
+                'footer-services': 'Our Services'
+            }
+        };
+
+        // Fonction pour mettre à jour le contenu traduit
+        function updateContent(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            document.title = translations[lang]['title'] || 'BodyMac Labs - Nos Réalisations';
+
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.textContent = document.body.classList.contains('dark-mode')
+                    ? translations[lang]['theme-toggle-dark']
+                    : translations[lang]['theme-toggle'];
+            }
+        }
+
+        // Initialiser la langue
+        const savedLang = localStorage.getItem('language') || 'fr';
+        document.getElementById('language-select').value = savedLang;
+        updateContent(savedLang);
+        document.documentElement.lang = savedLang;
+
+        // Écouteur pour le changement de langue
+        document.getElementById('language-select').addEventListener('change', (e) => {
+            const lang = e.target.value;
+            localStorage.setItem('language', lang);
+            updateContent(lang);
+            document.documentElement.lang = lang;
+        });
+
+        // Mode Sombre
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const lang = document.getElementById('language-select').value;
+            toggleButton.textContent = body.classList.contains('dark-mode')
+                ? translations[lang]['theme-toggle-dark']
+                : translations[lang]['theme-toggle'];
+        });
+
+        // Animation au défilement
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const checkVisibility = () => {
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', checkVisibility);
+        checkVisibility();
+
+        // Burger Menu
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('nav-menu');
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Fermer le menu burger après un clic sur un lien
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

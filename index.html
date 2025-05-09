@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="title">BodyMac Labs - Accueil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #1E3A8A;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .dark-mode nav {
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .dark-mode nav h1 {
+            color: #e2e8f0;
+        }
+
+        nav h1:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav ul li a, nav ul li button {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .dark-mode nav ul li a, .dark-mode nav ul li button {
+            color: #e2e8f0;
+        }
+
+        nav ul li a:hover, nav ul li button:hover {
+            color: #a3bffa;
+        }
+
+        .dark-mode nav ul li a:hover, .dark-mode nav ul li button:hover {
+            color: #ffffff;
+        }
+
+        nav ul li a::after, nav ul li button::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #a3bffa;
+            transition: width 0.3s ease;
+        }
+
+        .dark-mode nav ul li a::after, .dark-mode nav ul li button::after {
+            background-color: #ffffff;
+        }
+
+        nav ul li a:hover::after, nav ul li button:hover::after {
+            width: 100%;
+        }
+
+        /* Language Select */
+        #language-select {
+            background-color: #1E3A8A;
+            color: #ffffff;
+            border: 1px solid #a3bffa;
+            padding: 0.3rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            min-width: 60px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode #language-select {
+            background-color: #2a2a2a;
+            color: #e2e8f0;
+            border-color: #ffffff;
+        }
+
+        #language-select:hover {
+            background-color: #2b4eb8;
+        }
+
+        .dark-mode #language-select:hover {
+            background-color: #333333;
+        }
+
+        /* Burger Menu */
+        .burger {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+        }
+
+        .burger svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 2;
+            transition: all 0.4s ease;
+        }
+
+        .dark-mode .burger svg {
+            stroke: #e2e8f0;
+        }
+
+        .burger.active .line1 {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .burger.active .line2 {
+            opacity: 0;
+        }
+
+        .burger.active .line3 {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, #1E3A8A, #000000);
+            color: #ffffff;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .btn {
+            background-color: #ffffff;
+            color: #1E3A8A;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .hero .btn:hover {
+            transform: scale(1.05);
+            background-color: #e2e8f0;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+
+        .about .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #1E3A8A;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .services .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1E3A8A;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            padding: 0 2rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1E3A8A;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .team .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1E3A8A;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 1rem;
+            object-fit: cover;
+        }
+
+        .team-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1E3A8A;
+        }
+
+        .team-card p {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            background-color: #1E3A8A;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .testimonials .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: #333;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1E3A8A;
+        }
+
+        .testimonial-card p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-card p.quote {
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: #a3bffa;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem;
+            }
+
+            nav .container {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-right {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 0.5rem;
+                justify-content: flex-end;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            #language-select {
+                font-size: 0.8rem;
+                padding: 0.2rem;
+                min-width: 50px;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #1E3A8A;
+                padding: 0.5rem;
+                gap: 1rem;
+                transition: transform 0.3s;
+                transform: translateY(-100%);
+            }
+
+            nav ul.active {
+                display: flex;
+                transform: translateY(0);
+            }
+
+            nav ul li a, nav ul li button {
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .hero .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .about {
+                padding: 3rem 0;
+            }
+
+            .about h3, .services h3, .team h3, .testimonials h3 {
+                font-size: 2rem;
+            }
+
+            .about p {
+                font-size: 1rem;
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .services {
+                padding: 3rem 0;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .service-card {
+                padding: 0 1.5rem 1.5rem;
+            }
+
+            .service-card img {
+                height: 120px;
+            }
+
+            .service-card h4 {
+                font-size: 1.3rem;
+            }
+
+            .service-card p {
+                font-size: 0.9rem;
+            }
+
+            .team {
+                padding: 3rem 0;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .team-card {
+                padding: 1.5rem;
+            }
+
+            .team-card img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .team-card h4 {
+                font-size: 1.2rem;
+            }
+
+            .team-card p {
+                font-size: 0.9rem;
+            }
+
+            .testimonials {
+                padding: 3rem 0;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .testimonial-card h4 {
+                font-size: 1.2rem;
+            }
+
+            .testimonial-card p {
+                font-size: 0.9rem;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <h1 data-translate="logo">BodyMac Labs</h1>
+            <div class="nav-right">
+                <select id="language-select">
+                    <option value="fr">FR</option>
+                    <option value="en">US</option>
+                </select>
+                <div class="burger" id="burger">
+                    <svg viewBox="0 0 30 20">
+                        <line class="line1" x1="0" y1="2" x2="30" y2="2"/>
+                        <line class="line2" x1="0" y1="10" x2="30" y2="10"/>
+                        <line class="line3" x1="0" y1="18" x2="30" y2="18"/>
+                    </svg>
+                </div>
+                <ul id="nav-menu">
+                    <li><a href="index.html" data-translate="nav-home">Accueil</a></li>
+                    <li><a href="about.html" data-translate="nav-about">À propos</a></li>
+                    <li><a href="services.html" data-translate="nav-services">Services</a></li>
+                    <li><a href="realisation.html" data-translate="nav-achievements">Nos Réalisations</a></li>
+                    <li><a href="contact.html" data-translate="nav-contact">Contact</a></li>
+                    <li><button id="theme-toggle" data-translate="theme-toggle">🌙 Mode Sombre</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container fade-in">
+            <h2 data-translate="hero-title">Innovation au cœur de BodyMac Labs</h2>
+            <p data-translate="hero-text">Nous développons des solutions technologiques avancées pour transformer l'avenir. Rejoignez-nous dans cette aventure scientifique.</p>
+            <a href="services.html" class="btn" data-translate="hero-btn">Découvrir nos services</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container fade-in">
+            <h3 data-translate="about-title">Qui sommes-nous ?</h3>
+            <p data-translate="about-text">
+                BodyMac Labs est une entreprise dédiée à la recherche et au développement de technologies de pointe. 
+                Notre équipe d'experts travaille à repousser les limites de la science pour créer des solutions innovantes 
+                qui répondent aux défis de demain.
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h3 data-translate="services-title">Nos services</h3>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Recherche & Développement">
+                    <h4 data-translate="service-1-title">Recherche & Développement</h4>
+                    <p data-translate="service-1-text">Exploration de nouvelles technologies pour des applications pratiques.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Consulting">
+                    <h4 data-translate="service-2-title">Consulting</h4>
+                    <p data-translate="service-2-text">Conseils experts pour optimiser vos projets technologiques.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Solutions sur mesure">
+                    <h4 data-translate="service-3-title">Solutions sur mesure</h4>
+                    <p data-translate="service-3-text">Développement de solutions adaptées à vos besoins spécifiques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h3 data-translate="testimonials-title">Ce que disent nos clients</h3>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <h4 data-translate="testimonial-1-name">Jean Dupont</h4>
+                    <p data-translate="testimonial-1-role">CEO TechCorp</p>
+                    <p class="quote" data-translate="testimonial-1-quote">"BodyMac Labs a transformé notre approche technologique avec des solutions innovantes."</p>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <h4 data-translate="testimonial-2-name">Marie Lefèvre</h4>
+                    <p data-translate="testimonial-2-role">Innovate Solutions</p>
+                    <p class="quote" data-translate="testimonial-2-quote">"Leur expertise en R&D est inégalée. Un partenaire de confiance."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h3 data-translate="team-title">Notre équipe</h3>
+            <div class="team-grid">
+                <div class="team-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Dr. Sophie Martin">
+                    <h4 data-translate="team-member-1-name">Dr. Sophie Martin</h4>
+                    <p data-translate="team-member-1-role">Directrice scientifique, experte en biotechnologie.</p>
+                </div>
+                <div class="team-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="M. Julien Dubois">
+                    <h4 data-translate="team-member-2-name">M. Julien Dubois</h4>
+                    <p data-translate="team-member-2-role">Ingénieur en chef, spécialiste en IA et robotique.</p>
+                </div>
+                <div class="team-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Mme. Amina Cherif">
+                    <h4 data-translate="team-member-3-name">Mme. Amina Cherif</h4>
+                    <p data-translate="team-member-3-role">Responsable des opérations, passionnée par l'innovation durable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p data-translate="footer-copyright">© 2025 BodyMac Labs. Tous droits réservés.</p>
+            <p>
+                <a href="contact.html" data-translate="footer-contact">Contactez-nous</a> | 
+                <a href="services.html" data-translate="footer-services">Nos services</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Traductions
+        const translations = {
+            fr: {
+                'title': 'BodyMac Labs - Accueil',
+                'logo': 'BodyMac Labs',
+                'nav-home': 'Accueil',
+                'nav-about': 'À propos',
+                'nav-services': 'Services',
+                'nav-achievements': 'Nos Réalisations',
+                'nav-contact': 'Contact',
+                'theme-toggle': '🌙 Mode Sombre',
+                'theme-toggle-dark': '☀️ Mode Clair',
+                'hero-title': 'Innovation au cœur de BodyMac Labs',
+                'hero-text': 'Nous développons des solutions technologiques avancées pour transformer l\'avenir. Rejoignez-nous dans cette aventure scientifique.',
+                'hero-btn': 'Découvrir nos services',
+                'about-title': 'Qui sommes-nous ?',
+                'about-text': 'BodyMac Labs est une entreprise dédiée à la recherche et au développement de technologies de pointe. Notre équipe d\'experts travaille à repousser les limites de la science pour créer des solutions innovantes qui répondent aux défis de demain.',
+                'services-title': 'Nos services',
+                'service-1-title': 'Recherche & Développement',
+                'service-1-text': 'Exploration de nouvelles technologies pour des applications pratiques.',
+                'service-2-title': 'Consulting',
+                'service-2-text': 'Conseils experts pour optimiser vos projets technologiques.',
+                'service-3-title': 'Solutions sur mesure',
+                'service-3-text': 'Développement de solutions adaptées à vos besoins spécifiques.',
+                'testimonials-title': 'Ce que disent nos clients',
+                'testimonial-1-name': 'Jean Dupont',
+                'testimonial-1-role': 'CEO TechCorp',
+                'testimonial-1-quote': 'BodyMac Labs a transformé notre approche technologique avec des solutions innovantes.',
+                'testimonial-2-name': 'Marie Lefèvre',
+                'testimonial-2-role': 'Innovate Solutions',
+                'testimonial-2-quote': 'Leur expertise en R&D est inégalée. Un partenaire de confiance.',
+                'team-title': 'Notre équipe',
+                'team-member-1-name': 'Dr. Sophie Martin',
+                'team-member-1-role': 'Directrice scientifique, experte en biotechnologie.',
+                'team-member-2-name': 'M. Julien Dubois',
+                'team-member-2-role': 'Ingénieur en chef, spécialiste en IA et robotique.',
+                'team-member-3-name': 'Mme. Amina Cherif',
+                'team-member-3-role': 'Responsable des opérations, passionnée par l\'innovation durable.',
+                'footer-copyright': '© 2025 BodyMac Labs. Tous droits réservés.',
+                'footer-contact': 'Contactez-nous',
+                'footer-services': 'Nos services'
+            },
+            en: {
+                'title': 'BodyMac Labs - Home',
+                'logo': 'BodyMac Labs',
+                'nav-home': 'Home',
+                'nav-about': 'About',
+                'nav-services': 'Services',
+                'nav-achievements': 'Our Achievements',
+                'nav-contact': 'Contact',
+                'theme-toggle': '🌙 Dark Mode',
+                'theme-toggle-dark': '☀️ Light Mode',
+                'hero-title': 'Innovation at the Heart of BodyMac Labs',
+                'hero-text': 'We develop advanced technological solutions to transform the future. Join us in this scientific adventure.',
+                'hero-btn': 'Discover Our Services',
+                'about-title': 'Who Are We?',
+                'about-text': 'BodyMac Labs is a company dedicated to the research and development of cutting-edge technologies. Our team of experts works to push the boundaries of science to create innovative solutions that address tomorrow\'s challenges.',
+                'services-title': 'Our Services',
+                'service-1-title': 'Research & Development',
+                'service-1-text': 'Exploration of new technologies for practical applications.',
+                'service-2-title': 'Consulting',
+                'service-2-text': 'Expert advice to optimize your technological projects.',
+                'service-3-title': 'Custom Solutions',
+                'service-3-text': 'Development of solutions tailored to your specific needs.',
+                'testimonials-title': 'What Our Clients Say',
+                'testimonial-1-name': 'Jean Dupont',
+                'testimonial-1-role': 'CEO TechCorp',
+                'testimonial-1-quote': 'BodyMac Labs transformed our technological approach with innovative solutions.',
+                'testimonial-2-name': 'Marie Lefèvre',
+                'testimonial-2-role': 'Innovate Solutions',
+                'testimonial-2-quote': 'Their expertise in R&D is unmatched. A trusted partner.',
+                'team-title': 'Our Team',
+                'team-member-1-name': 'Dr. Sophie Martin',
+                'team-member-1-role': 'Chief Scientist, Biotechnology Expert.',
+                'team-member-2-name': 'Mr. Julien Dubois',
+                'team-member-2-role': 'Chief Engineer, Specialist in AI and Robotics.',
+                'team-member-3-name': 'Ms. Amina Cherif',
+                'team-member-3-role': 'Operations Manager, Passionate about Sustainable Innovation.',
+                'footer-copyright': '© 2025 BodyMac Labs. All rights reserved.',
+                'footer-contact': 'Contact Us',
+                'footer-services': 'Our Services'
+            }
+        };
+
+        // Fonction pour mettre à jour le contenu traduit
+        function updateContent(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            document.title = translations[lang]['title'] || 'BodyMac Labs - Accueil';
+
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.textContent = document.body.classList.contains('dark-mode')
+                    ? translations[lang]['theme-toggle-dark']
+                    : translations[lang]['theme-toggle'];
+            }
+        }
+
+        // Initialiser la langue
+        const savedLang = localStorage.getItem('language') || 'fr';
+        document.getElementById('language-select').value = savedLang;
+        updateContent(savedLang);
+        document.documentElement.lang = savedLang;
+
+        // Écouteur pour le changement de langue
+        document.getElementById('language-select').addEventListener('change', (e) => {
+            const lang = e.target.value;
+            localStorage.setItem('language', lang);
+            updateContent(lang);
+            document.documentElement.lang = lang;
+        });
+
+        // Mode Sombre
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const lang = document.getElementById('language-select').value;
+            toggleButton.textContent = body.classList.contains('dark-mode')
+                ? translations[lang]['theme-toggle-dark']
+                : translations[lang]['theme-toggle'];
+        });
+
+        // Animation au défilement
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const checkVisibility = () => {
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', checkVisibility);
+        checkVisibility();
+
+        // Burger Menu
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('nav-menu');
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Fermer le menu burger après un clic sur un lien
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="title">BodyMac Labs - Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #1E3A8A;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .dark-mode nav {
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .dark-mode nav h1 {
+            color: #e2e8f0;
+        }
+
+        nav h1:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav ul li a, nav ul li button {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .dark-mode nav ul li a, .dark-mode nav ul li button {
+            color: #e2e8f0;
+        }
+
+        nav ul li a:hover, nav ul li button:hover {
+            color: #a3bffa;
+        }
+
+        .dark-mode nav ul li a:hover, .dark-mode nav ul li button:hover {
+            color: #ffffff;
+        }
+
+        nav ul li a::after, nav ul li button::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #a3bffa;
+            transition: width 0.3s ease;
+        }
+
+        .dark-mode nav ul li a::after, .dark-mode nav ul li button::after {
+            background-color: #ffffff;
+        }
+
+        nav ul li a:hover::after, nav ul li button:hover::after {
+            width: 100%;
+        }
+
+        /* Language Select */
+        #language-select {
+            background-color: #1E3A8A;
+            color: #ffffff;
+            border: 1px solid #a3bffa;
+            padding: 0.3rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            min-width: 60px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode #language-select {
+            background-color: #2a2a2a;
+            color: #e2e8f0;
+            border-color: #ffffff;
+        }
+
+        #language-select:hover {
+            background-color: #2b4eb8;
+        }
+
+        .dark-mode #language-select:hover {
+            background-color: #333333;
+        }
+
+        /* Burger Menu */
+        .burger {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+        }
+
+        .burger svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 2;
+            transition: all 0.4s ease;
+        }
+
+        .dark-mode .burger svg {
+            stroke: #e2e8f0;
+        }
+
+        .burger.active .line1 {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .burger.active .line2 {
+            opacity: 0;
+        }
+
+        .burger.active .line3 {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Intro Section */
+        .intro {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(to right, #1E3A8A, #000000);
+            color: #ffffff;
+        }
+
+        .dark-mode .intro {
+            background: linear-gradient(to right, #0f1d4a, #1a1a1a);
+        }
+
+        .intro .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .intro h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+
+        .dark-mode .services {
+            background-color: #2a2a2a;
+        }
+
+        .services .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1E3A8A;
+        }
+
+        .dark-mode .services h3 {
+            color: #a3bffa;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .dark-mode .service-card {
+            background-color: #333333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode .service-card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .service-card img {
+            border-color: #555;
+        }
+
+        .service-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .service-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1E3A8A;
+        }
+
+        .dark-mode .service-card h4 {
+            color: #a3bffa;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .dark-mode .service-card p {
+            color: #cccccc;
+        }
+
+        .service-card a {
+            display: inline-block;
+            background-color: #1E3A8A;
+            color: #ffffff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .dark-mode .service-card a {
+            background-color: #2b4eb8;
+        }
+
+        .service-card a:hover {
+            background-color: #2b4eb8;
+            transform: scale(1.05);
+        }
+
+        .dark-mode .service-card a:hover {
+            background-color: #3b6ad6;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 5rem 0;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+
+        .dark-mode .faq {
+            background-color: #2a2a2a;
+        }
+
+        .faq .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .faq h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1E3A8A;
+        }
+
+        .dark-mode .faq h3 {
+            color: #a3bffa;
+        }
+
+        .faq-item {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            text-align: left;
+            padding: 0 1rem;
+        }
+
+        .faq-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1E3A8A;
+        }
+
+        .dark-mode .faq-item h4 {
+            color: #a3bffa;
+        }
+
+        .faq-item p {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .dark-mode .faq-item p {
+            color: #cccccc;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: #a3bffa;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem;
+            }
+
+            nav .container {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-right {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 0.5rem;
+                justify-content: flex-end;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            #language-select {
+                font-size: 0.8rem;
+                padding: 0.2rem;
+                min-width: 50px;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #1E3A8A;
+                padding: 0.5rem;
+                gap: 1rem;
+                transition: transform 0.3s;
+                transform: translateY(-100%);
+            }
+
+            nav ul.active {
+                display: flex;
+                transform: translateY(0);
+            }
+
+            nav ul li a, nav ul li button {
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .intro h2, .services h3, .faq h3 {
+                font-size: 2rem;
+            }
+
+            .intro p, .service-card p, .faq-item p {
+                font-size: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .service-card img {
+                height: 120px;
+            }
+
+            .faq-item {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <h1 data-translate="logo">BodyMac Labs</h1>
+            <div class="nav-right">
+                <select id="language-select">
+                    <option value="fr">FR</option>
+                    <option value="en">US</option>
+                </select>
+                <div class="burger" id="burger">
+                    <svg viewBox="0 0 30 20">
+                        <line class="line1" x1="0" y1="2" x2="30" y2="2"/>
+                        <line class="line2" x1="0" y1="10" x2="30" y2="10"/>
+                        <line class="line3" x1="0" y1="18" x2="30" y2="18"/>
+                    </svg>
+                </div>
+                <ul id="nav-menu">
+                    <li><a href="index.html" data-translate="nav-home">Accueil</a></li>
+                    <li><a href="about.html" data-translate="nav-about">À propos</a></li>
+                    <li><a href="services.html" data-translate="nav-services">Services</a></li>
+                    <li><a href="realisation.html" data-translate="nav-achievements">Nos Réalisations</a></li>
+                    <li><a href="contact.html" data-translate="nav-contact">Contact</a></li>
+                    <li><button id="theme-toggle" data-translate="theme-toggle">🌙 Mode Sombre</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Intro Section -->
+    <section class="intro">
+        <div class="container fade-in">
+            <h2 data-translate="intro-title">Nos services</h2>
+            <p data-translate="intro-text">
+                Chez BodyMac Labs, nous offrons une gamme de services innovants pour accompagner vos projets technologiques, de la recherche fondamentale au développement de solutions sur mesure.
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h3 data-translate="services-title">Ce que nous proposons</h3>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <img src="https://via.placeholder.com/300x150?text=R%26D" alt="Recherche & Développement">
+                    <h4 data-translate="service-1-title">Recherche & Développement</h4>
+                    <p data-translate="service-1-text">
+                        Nous explorons les technologies de pointe pour créer des solutions innovantes adaptées aux défis actuels et futurs.
+                    </p>
+                    <a href="#" data-translate="service-1-btn">En savoir plus</a>
+                </div>
+                <div class="service-card fade-in">
+                    <img src="https://via.placeholder.com/300x150?text=Consulting" alt="Consulting technologique">
+                    <h4 data-translate="service-2-title">Consulting technologique</h4>
+                    <p data-translate="service-2-text">
+                        Nos experts vous accompagnent pour optimiser vos projets, en apportant des conseils stratégiques et techniques.
+                    </p>
+                    <a href="#" data-translate="service-2-btn">En savoir plus</a>
+                </div>
+                <div class="service-card fade-in">
+                    <img src="https://via.placeholder.com/300x150?text=Solutions" alt="Solutions sur mesure">
+                    <h4 data-translate="service-3-title">Solutions sur mesure</h4>
+                    <p data-translate="service-3-text">
+                        Nous concevons et développons des solutions personnalisées pour répondre aux besoins spécifiques de votre entreprise.
+                    </p>
+                    <a href="#" data-translate="service-3-btn">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h3 data-translate="faq-title">Questions fréquentes</h3>
+            <div class="faq-item fade-in">
+                <h4 data-translate="faq-1-question">Quels types de projets réalisez-vous ?</h4>
+                <p data-translate="faq-1-answer">
+                    Nous travaillons sur des projets variés, allant de la recherche en biotechnologie à la création de logiciels sur mesure pour l'industrie.
+                </p>
+            </div>
+            <div class="faq-item fade-in">
+                <h4 data-translate="faq-2-question">Comment démarrer une collaboration ?</h4>
+                <p data-translate="faq-2-answer">
+                    Contactez-nous via notre page de contact, et nous organiserons une consultation pour discuter de vos besoins.
+                </p>
+            </div>
+            <div class="faq-item fade-in">
+                <h4 data-translate="faq-3-question">Proposez-vous un suivi après livraison ?</h4>
+                <p data-translate="faq-3-answer">
+                    Oui, nous offrons un support continu pour garantir le succès de vos projets après leur mise en œuvre.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p data-translate="footer-copyright">© 2025 BodyMac Labs. Tous droits réservés.</p>
+            <p>
+                <a href="contact.html" data-translate="footer-contact">Contactez-nous</a> | 
+                <a href="services.html" data-translate="footer-services">Nos services</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Traductions
+        const translations = {
+            fr: {
+                'title': 'BodyMac Labs - Services',
+                'logo': 'BodyMac Labs',
+                'nav-home': 'Accueil',
+                'nav-about': 'À propos',
+                'nav-services': 'Services',
+                'nav-achievements': 'Nos Réalisations',
+                'nav-contact': 'Contact',
+                'theme-toggle': '🌙 Mode Sombre',
+                'theme-toggle-dark': '☀️ Mode Clair',
+                'intro-title': 'Nos services',
+                'intro-text': 'Chez BodyMac Labs, nous offrons une gamme de services innovants pour accompagner vos projets technologiques, de la recherche fondamentale au développement de solutions sur mesure.',
+                'services-title': 'Ce que nous proposons',
+                'service-1-title': 'Recherche & Développement',
+                'service-1-text': 'Nous explorons les technologies de pointe pour créer des solutions innovantes adaptées aux défis actuels et futurs.',
+                'service-1-btn': 'En savoir plus',
+                'service-2-title': 'Consulting technologique',
+                'service-2-text': 'Nos experts vous accompagnent pour optimiser vos projets, en apportant des conseils stratégiques et techniques.',
+                'service-2-btn': 'En savoir plus',
+                'service-3-title': 'Solutions sur mesure',
+                'service-3-text': 'Nous concevons et développons des solutions personnalisées pour répondre aux besoins spécifiques de votre entreprise.',
+                'service-3-btn': 'En savoir plus',
+                'faq-title': 'Questions fréquentes',
+                'faq-1-question': 'Quels types de projets réalisez-vous ?',
+                'faq-1-answer': 'Nous travaillons sur des projets variés, allant de la recherche en biotechnologie à la création de logiciels sur mesure pour l\'industrie.',
+                'faq-2-question': 'Comment démarrer une collaboration ?',
+                'faq-2-answer': 'Contactez-nous via notre page de contact, et nous organiserons une consultation pour discuter de vos besoins.',
+                'faq-3-question': 'Proposez-vous un suivi après livraison ?',
+                'faq-3-answer': 'Oui, nous offrons un support continu pour garantir le succès de vos projets après leur mise en œuvre.',
+                'footer-copyright': '© 2025 BodyMac Labs. Tous droits réservés.',
+                'footer-contact': 'Contactez-nous',
+                'footer-services': 'Nos services'
+            },
+            en: {
+                'title': 'BodyMac Labs - Services',
+                'logo': 'BodyMac Labs',
+                'nav-home': 'Home',
+                'nav-about': 'About',
+                'nav-services': 'Services',
+                'nav-achievements': 'Our Achievements',
+                'nav-contact': 'Contact',
+                'theme-toggle': '🌙 Dark Mode',
+                'theme-toggle-dark': '☀️ Light Mode',
+                'intro-title': 'Our Services',
+                'intro-text': 'At BodyMac Labs, we offer a range of innovative services to support your technological projects, from fundamental research to the development of custom solutions.',
+                'services-title': 'What We Offer',
+                'service-1-title': 'Research & Development',
+                'service-1-text': 'We explore cutting-edge technologies to create innovative solutions tailored to current and future challenges.',
+                'service-1-btn': 'Learn More',
+                'service-2-title': 'Technological Consulting',
+                'service-2-text': 'Our experts guide you to optimize your projects, providing strategic and technical advice.',
+                'service-2-btn': 'Learn More',
+                'service-3-title': 'Custom Solutions',
+                'service-3-text': 'We design and develop personalized solutions to meet your company\'s specific needs.',
+                'service-3-btn': 'Learn More',
+                'faq-title': 'Frequently Asked Questions',
+                'faq-1-question': 'What types of projects do you undertake?',
+                'faq-1-answer': 'We work on a variety of projects, from biotechnology research to creating custom software for industry.',
+                'faq-2-question': 'How do I start a collaboration?',
+                'faq-2-answer': 'Contact us through our contact page, and we will arrange a consultation to discuss your needs.',
+                'faq-3-question': 'Do you offer support after delivery?',
+                'faq-3-answer': 'Yes, we provide ongoing support to ensure the success of your projects after implementation.',
+                'footer-copyright': '© 2025 BodyMac Labs. All rights reserved.',
+                'footer-contact': 'Contact Us',
+                'footer-services': 'Our Services'
+            }
+        };
+
+        // Fonction pour mettre à jour le contenu traduit
+        function updateContent(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            document.title = translations[lang]['title'] || 'BodyMac Labs - Services';
+
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.textContent = document.body.classList.contains('dark-mode')
+                    ? translations[lang]['theme-toggle-dark']
+                    : translations[lang]['theme-toggle'];
+            }
+        }
+
+        // Initialiser la langue
+        const savedLang = localStorage.getItem('language') || 'fr';
+        document.getElementById('language-select').value = savedLang;
+        updateContent(savedLang);
+        document.documentElement.lang = savedLang;
+
+        // Écouteur pour le changement de langue
+        document.getElementById('language-select').addEventListener('change', (e) => {
+            const lang = e.target.value;
+            localStorage.setItem('language', lang);
+            updateContent(lang);
+            document.documentElement.lang = lang;
+        });
+
+        // Mode Sombre
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const lang = document.getElementById('language-select').value;
+            toggleButton.textContent = body.classList.contains('dark-mode')
+                ? translations[lang]['theme-toggle-dark']
+                : translations[lang]['theme-toggle'];
+        });
+
+        // Animation au défilement
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const checkVisibility = () => {
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', checkVisibility);
+        checkVisibility();
+
+        // Burger Menu
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('nav-menu');
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Fermer le menu burger après un clic sur un lien
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
